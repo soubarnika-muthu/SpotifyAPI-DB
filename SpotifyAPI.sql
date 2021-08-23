@@ -8,17 +8,13 @@ userid int identity(1,1) primary key,
 username varchar(100) not null,
 
 )
----Inserting the data into the table
+---Inserting the data into the tables
 INSERT INTO User_Table(username)
 VALUES('Soubarnika'),
       ('Geminika'),
 	  ('shanthi'),
 	  ('Bavi'),
 	  ('venkat')
-
-
-
-
 
 INSERT INTO Playlist_Table(playlistid,playlistname,userid)
 VALUES(1,'myplaylist1',1),
@@ -33,19 +29,31 @@ VALUES(1,'myplaylist1',1),
 
      
 	 select * from User_Table
-	 select * from Playlist_Table
+	 --Adding new column  to the user table
+	 Alter table User_Table
+	 Add  Emailid  varchar(20) ;
+	 --Updating value to the new column
+	 update User_Table set Emailid='sou@gmail.com' where userid=1;
+	 update User_Table set Emailid='gem@gmail.com' where userid=2;
+	 update User_Table set Emailid='shanthi.v@yahoo.com' where userid=3;
+	 update User_Table set Emailid='bavi@gmail.com' where userid=4;
+	 update User_Table set Emailid='vv@yahoo.com' where userid=5;
+	 update User_Table set Emailid='meenu@tvsnxt.io' where userid=6;
 
+	 select * from Playlist_Table
+	 --altering playlist table to add new column
 	 ALTER TABLE Playlist_Table ALTER COLUMN playlistid int NOT NULL;
 
 	 ALTER TABLE Playlist_Table ADD PRIMARY KEY (playlistid) ;
----creating Playlist table
+
+---creating Playlisttracks table
 CREATE TABLE Playlist_Tracks
 (
 trackid int PRIMARY KEY ,
 trackname varchar(100),
 playlistid int FOREIGN KEY REFERENCES Playlist_Table(playlistid) not null,
 )
---Drop table Playlist_Tracks
+--Inserting records into playlist tracks  table
 
 INSERT INTO dbo.Playlist_Tracks(trackid,trackname,playlistid)
 VALUES(1,'Naanare',1),
